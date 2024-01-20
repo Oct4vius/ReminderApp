@@ -1,7 +1,7 @@
 import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import { HomeService } from '../../services/home.service';
 import { reminder } from '../../types/home.types';
+import { v4 } from 'uuid'
 
 @Component({
   selector: 'home-input',
@@ -17,7 +17,10 @@ export class InputComponent {
 
   public saveReminder = ( title: string ) => {
 
-    this.addReminder.emit({title})
+    this.addReminder.emit({
+      id: v4(),
+      title
+    })
 
     this.reminderInput.nativeElement.value = ''
   }

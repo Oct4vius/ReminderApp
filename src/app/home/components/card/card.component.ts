@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { reminder } from '../../types/home.types';
 
 @Component({
   selector: 'home-card',
@@ -8,7 +9,7 @@ import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 export class CardComponent implements OnInit {
 
   @Input()
-  public title!: string; 
+  public reminder!: reminder; 
 
   @Output()
   public onDeleteReminder: EventEmitter<string> = new EventEmitter()
@@ -17,11 +18,11 @@ export class CardComponent implements OnInit {
   public faTrash = faTrash
 
   public onDelete = () => {
-    this.onDeleteReminder.emit(this.title)
+    this.onDeleteReminder.emit(this.reminder.id)
   }
 
   ngOnInit(): void {
-    if(!this.title) throw Error('It needs a title')
+    if(!this.reminder) throw Error('It needs a reminder')
   }
 
 }

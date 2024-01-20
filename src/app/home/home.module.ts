@@ -4,6 +4,7 @@ import { HomePageComponent } from './pages/homePage/homePage.component';
 import { CardComponent } from './components/card/card.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { InputComponent } from './components/input/input.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -18,7 +19,8 @@ import { InputComponent } from './components/input/input.component';
   imports: [
     CommonModule,
 
-    FontAwesomeModule
+    FontAwesomeModule,
+    SharedModule
   ],
   exports: [
     HomePageComponent

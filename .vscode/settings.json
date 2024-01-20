@@ -5,7 +5,8 @@
             "skipDisplayBlock": true
         },
         "angular-*": {
-            "externalTemplate": true
+            "externalTemplate": true,
+            "skipStyle": true
         }
     }
 }

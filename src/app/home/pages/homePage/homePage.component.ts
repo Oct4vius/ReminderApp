@@ -9,13 +9,11 @@ import { reminder } from '../../types/home.types';
 })
 export class HomePageComponent{ 
 
-  constructor (private homeService: HomeService) {
-  }
+  constructor (private homeService: HomeService) { }
 
   get reminders(): reminder[]{
     return [...this.homeService._reminders ]
   }
-
 
   public deleteReminder = (title: string) => {
     this.homeService.deleteReminder(title)

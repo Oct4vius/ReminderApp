@@ -21,8 +21,8 @@ export class HomeService{
     return [...this.reminders]
   }
 
-  public deleteReminder = ( title: string ): void => {
-    this.reminders.filter( (reminder) => reminder.title !== title )
+  public deleteReminder = ( id: string ): void => {
+    this.reminders = this.reminders.filter( (reminder) => reminder.id !== id )
     localStorage.setItem('reminders', JSON.stringify(this.reminders))
   }
  
