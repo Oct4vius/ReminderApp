@@ -1,0 +1,7 @@
+<home-input (addReminder)="addReminder($event)"></home-input>
+
+<home-card
+  *ngFor="let reminder of reminders"
+  (onDeleteReminder)="deleteReminder($event)"
+  [title]="reminder.title"
+></home-card>

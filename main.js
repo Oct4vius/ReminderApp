@@ -1,13 +1,18 @@
 const { app, BrowserWindow } = require("electron");
-const  url  = require('url');
-const  path = require('path');
+const url  = require('url');
+const path = require('path');
 
 createWindow = () => {
     appWin = new BrowserWindow({
-        width: 800,
-        height: 600,
-        title: "Angular and Electron",
-        resizable: false,
+        width: 340,
+        //width: 340,
+        height: 610,
+        minWidth: 340,
+        minHeight: 500,
+        movable: true,
+        backgroundColor: "#FFA500",
+        frame: false,
+        resizable: true,
         webPreferences: {
             contextIsolation: false,
             nodeIntegration: true

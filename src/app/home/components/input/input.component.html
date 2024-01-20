@@ -1,0 +1,11 @@
+<div class="w-full bg-[#E69500] flex justify-between px-5 py-1">
+  <input
+    class="w-full outline-none bg-[#E69500] placeholder-[#101010]"
+    (keyup.enter)="saveReminder(reminderInput.value)"
+    type="text"
+    placeholder="What do you want to remember?"
+    #reminderInput
+  />
+
+  <fa-icon (click)="saveReminder(reminderInput.value)" [icon]="faPlus"></fa-icon>
+</div>
