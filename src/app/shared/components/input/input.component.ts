@@ -13,7 +13,7 @@ import {
 })
 export class InputComponent {
   @Input()
-  public placeholder?: string;
+  public placeholder: string = '';
 
   @Output()
   public saveInputValue: EventEmitter<string> = new EventEmitter();

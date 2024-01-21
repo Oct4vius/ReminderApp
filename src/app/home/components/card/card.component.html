@@ -1,13 +1,14 @@
-<div class="w-full bg-[#E69500] ">
-    <div class="w-full flex justify-between px-5 py-1">
-        <h2 class="font-bold"> {{ reminder.title | titlecase }}</h2>
+<div class="w-full bg-[#E69500]">
+  <div class="w-full flex justify-between px-5 py-1">
+    <h2 class="font-bold">{{ reminder.title | titlecase }}</h2>
 
-        <div class="flex gap-2 ">
-            <fa-icon class="cursor-pointer hover:text-red-500"  (click)="onDelete()" [icon]="faTrash"></fa-icon>
-            <fa-icon [icon]="faPlus" ></fa-icon> 
-        </div>
-        
+    <div class="flex gap-2">
+      <fa-icon
+        class="cursor-pointer hover:text-red-500"
+        (click)="onDelete()"
+        [icon]="faTrash"
+      ></fa-icon>
+      <fa-icon (click)="onAddChild()" [icon]="faPlus"></fa-icon>
     </div>
-
-
+  </div>
 </div>

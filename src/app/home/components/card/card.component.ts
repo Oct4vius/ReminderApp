@@ -17,6 +17,10 @@ export class CardComponent implements OnInit {
   public faPlus = faPlus
   public faTrash = faTrash
 
+  public onAddChild = () => {
+    
+  }
+
   public onDelete = () => {
     this.onDeleteReminder.emit(this.reminder.id)
   }
