@@ -31,6 +31,11 @@ export class HomeService{
     localStorage.setItem('reminders', JSON.stringify(this.reminders))
   }
 
+  public saveChildReminder = ( index: number , reminder: reminder ): void => {
+    this.reminders[index].children?.push(reminder)
+    localStorage.setItem('reminders', JSON.stringify(this.reminders))
+  }
+
 
 
 }

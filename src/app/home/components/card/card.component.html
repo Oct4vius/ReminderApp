@@ -8,7 +8,20 @@
         (click)="onDelete()"
         [icon]="faTrash"
       ></fa-icon>
-      <fa-icon (click)="onAddChild()" [icon]="faPlus"></fa-icon>
+      <fa-icon class="cursor-pointer hover:text-green-600" (click)="showReminderChildren()" [icon]="faPlus"></fa-icon>
     </div>
   </div>
+
+  @if (showChildren) {
+
+    <div class="px-8" >
+      <shared-input
+        placeholder="What do you want to remember?"
+        (saveInputValue)="onAddChild($event)"
+      >
+      </shared-input>
+    </div>
+
+  }
+
 </div>

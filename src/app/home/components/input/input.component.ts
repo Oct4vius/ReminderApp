@@ -19,7 +19,8 @@ export class InputComponent {
 
     this.addReminder.emit({
       id: v4(),
-      title
+      title,
+      children: []
     })
 
     this.reminderInput.nativeElement.value = ''

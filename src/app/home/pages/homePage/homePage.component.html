@@ -4,9 +4,12 @@
 
   <div>
     <home-card
-      *ngFor="let reminder of reminders"
-      (onDeleteReminder)="deleteReminder($event)"
+      *ngFor="let reminder of reminders;
+      let i = index;
+      "
+      [cardIndex]="i"
       [reminder]="reminder"
+      (onDeleteReminder)="deleteReminder($event)"
     ></home-card>
   </div>
 
