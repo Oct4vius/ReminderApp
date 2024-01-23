@@ -16,15 +16,25 @@ export class CardComponent implements OnInit {
   public reminder!: reminder; 
 
   @Input()
+  public isChild: boolean = false
+
+  @Input()
   public cardIndex: number = 0;
 
   @Output()
   public onDeleteReminder: EventEmitter<string> = new EventEmitter()
 
+  @Output()
+  public onDeleteChildReminder: EventEmitter<reminder> = new EventEmitter()
+
   public faPlus = faPlus
   public faTrash = faTrash
 
   public showChildren: boolean = false
+
+  public toggleShowChildren = () => {
+    this.showChildren = !this.showChildren
+  }
 
   public showReminderChildren = () => {
     this.showChildren = true
@@ -38,9 +48,32 @@ export class CardComponent implements OnInit {
     })
   }
 
-  public onDelete = () => {
+  public onAddChildSon = ( title: string ) => {
+    this.reminder.children?.push({
+      id: v4(),
+      title,
+      children: []
+    })
+  }
+
+  public onDelete = (): void => {
     this.onDeleteReminder.emit(this.reminder.id)
   }
+
+  public onDeleteChild = (): void => {
+    this.onDeleteChildReminder.emit(this.reminder)
+  }
+
+  public handleDeleteChild = (reminder: reminder): void => {
+    if(!this.reminder.children) return
+    
+    this.reminder.children = this.reminder.children.filter( (rem) => rem.id !== reminder.id )
+    
+    this.onDeleteChildReminder.emit(this.reminder)
+  
+  }
+
+
 
   ngOnInit(): void {
     if(!this.reminder) throw Error('It needs a reminder')

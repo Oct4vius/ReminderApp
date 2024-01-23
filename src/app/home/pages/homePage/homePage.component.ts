@@ -19,6 +19,11 @@ export class HomePageComponent{
     this.homeService.deleteReminder(title)
   }
 
+  public deleteChildReminder = ( reminder: reminder ) => {
+    // Se elemina solo porque al hacer el filtro desde el hijo automaticamente se actualiza aqui en el padre pero no se guarda en el local storage
+    console.log(reminder)
+  }
+
   public addReminder = (reminder: reminder) => {
     this.homeService.saveReminder(reminder)
   }

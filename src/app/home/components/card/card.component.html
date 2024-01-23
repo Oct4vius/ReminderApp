@@ -1,27 +1,43 @@
 <div class="w-full bg-[#E69500]">
   <div class="w-full flex justify-between px-5 py-1">
-    <h2 class="font-bold">{{ reminder.title | titlecase }}</h2>
+    <h2
+      class="font-bold cursor-default"
+      [ngClass]="{ 'cursor-pointer': reminder.children?.length !== 0 }"
+      (click)="toggleShowChildren()"
+    >
+      {{ reminder.title }}
+    </h2>
 
     <div class="flex gap-2">
       <fa-icon
         class="cursor-pointer hover:text-red-500"
-        (click)="onDelete()"
+        (click)="!isChild ? onDelete() : onDeleteChild()"
         [icon]="faTrash"
       ></fa-icon>
-      <fa-icon class="cursor-pointer hover:text-green-600" (click)="showReminderChildren()" [icon]="faPlus"></fa-icon>
+      <fa-icon
+        class="cursor-pointer hover:text-green-600"
+        (click)="showReminderChildren()"
+        [icon]="faPlus"
+      ></fa-icon>
     </div>
   </div>
 
   @if (showChildren) {
 
-    <div class="px-8" >
-      <shared-input
-        placeholder="What do you want to remember?"
-        (saveInputValue)="onAddChild($event)"
-      >
-      </shared-input>
-    </div>
+  <div class="px-8">
+    <shared-input
+      placeholder="Anything else you would like to remember?"
+      (saveInputValue)="onAddChildSon($event)"
+    >
+    </shared-input>
+    <home-card
+      *ngFor="let reminder of reminder.children; let i = index"
+      [cardIndex]="i"
+      [reminder]="reminder"
+      [isChild]="true"
+      (onDeleteChildReminder)="handleDeleteChild($event)"
+    ></home-card>
+  </div>
 
   }
-
 </div>
