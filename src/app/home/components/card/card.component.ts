@@ -9,74 +9,65 @@ import { v4 } from 'uuid';
   templateUrl: './card.component.html',
 })
 export class CardComponent implements OnInit {
-
-  constructor( private homeService: HomeService ) {}
-
-  @Input()
-  public reminder!: reminder; 
+  constructor(private homeService: HomeService) {}
 
   @Input()
-  public isChild: boolean = false
+  public reminder!: reminder;
+
+  @Input()
+  public isChild: boolean = false;
 
   @Input()
   public cardIndex: number = 0;
 
   @Output()
-  public onDeleteReminder: EventEmitter<string> = new EventEmitter()
+  public onDeleteReminder: EventEmitter<string> = new EventEmitter();
 
   @Output()
-  public onDeleteChildReminder: EventEmitter<reminder> = new EventEmitter()
+  public onDeleteChildReminder: EventEmitter<reminder> = new EventEmitter();
 
-  public faPlus = faPlus
-  public faTrash = faTrash
+  public faPlus = faPlus;
+  public faTrash = faTrash;
 
-  public showChildren: boolean = false
+  public showChildren: boolean = false;
 
   public toggleShowChildren = () => {
-    this.showChildren = !this.showChildren
-  }
+    this.showChildren = !this.showChildren;
+  };
 
   public showReminderChildren = () => {
-    this.showChildren = true
-  }
+    this.showChildren = true;
+  };
 
-  public onAddChild = ( title: string ) => {
-    this.homeService.saveChildReminder(this.cardIndex, {
-      id: v4(),
-      title,
-      children: []
-    })
-  }
-
-  public onAddChildSon = ( title: string ) => {
+  public onAddChild = (title: string) => {
     this.reminder.children?.push({
       id: v4(),
       title,
-      children: []
-    })
-  }
+      children: [],
+    });
+
+    this.homeService.save()
+  };
 
   public onDelete = (): void => {
-    this.onDeleteReminder.emit(this.reminder.id)
-  }
+    this.onDeleteReminder.emit(this.reminder.id);
+  };
 
   public onDeleteChild = (): void => {
-    this.onDeleteChildReminder.emit(this.reminder)
-  }
+    this.onDeleteChildReminder.emit(this.reminder);
+  };
 
   public handleDeleteChild = (reminder: reminder): void => {
-    if(!this.reminder.children) return
-    
-    this.reminder.children = this.reminder.children.filter( (rem) => rem.id !== reminder.id )
-    
-    this.onDeleteChildReminder.emit(this.reminder)
-  
-  }
+    if (!this.reminder.children) return;
 
+    this.reminder.children = this.reminder.children.filter(
+      (rem) => rem.id !== reminder.id
+    );
 
+    this.homeService.save()
+  };
 
   ngOnInit(): void {
-    if(!this.reminder) throw Error('It needs a reminder')
+    if (!this.reminder) throw Error('It needs a reminder');
   }
-
 }

@@ -1,7 +1,19 @@
-<input
-  class="w-full outline-none bg-[#E69500] placeholder-[#101010]"
-  (keyup.enter)="saveInput(reminderInput.value)"
-  type="text"
-  [placeholder]="placeholder"
-  #reminderInput
-/>
+<div class="flex">
+  <input
+    class="w-full outline-none bg-[#E69500] placeholder-[#101010]"
+    type="text"
+    (keyup.enter)="saveInput(reminderInput.value)"
+    [placeholder]="placeholder"
+    #reminderInput
+  />
+
+  @if (Icon) {
+
+  <fa-icon
+    class="cursor-pointer hover:text-green-600"
+    [icon]="Icon"
+    (click)="saveInput(reminderInput.value)"
+  ></fa-icon>
+
+  }
+</div>

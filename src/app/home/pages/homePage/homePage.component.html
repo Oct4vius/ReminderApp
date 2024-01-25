@@ -1,18 +1,13 @@
-<div class="flex flex-col gap-2" >
-  <home-input (addReminder)="addReminder($event)"></home-input>
-  
+<div class="flex flex-col gap-2">
+  <home-topbar (addReminder)="addReminder($event)"></home-topbar>
 
   <div>
     <home-card
-      *ngFor="let reminder of reminders;
-      let i = index;
-      "
+      *ngFor="let reminder of reminders; let i = index"
       [cardIndex]="i"
       [reminder]="reminder"
       (onDeleteReminder)="deleteReminder($event)"
       (onDeleteChildReminder)="deleteChildReminder($event)"
     ></home-card>
   </div>
-
 </div>
-

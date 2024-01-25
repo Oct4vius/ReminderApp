@@ -12,7 +12,6 @@ export class HomeService{
     }else{
       this.reminders = JSON.parse(localStorage.getItem('reminders')!)
     }
-
   }
 
   private reminders!: reminder[];
@@ -23,18 +22,16 @@ export class HomeService{
 
   public deleteReminder = ( id: string ): void => {
     this.reminders = this.reminders.filter( (reminder) => reminder.id !== id )
-    localStorage.setItem('reminders', JSON.stringify(this.reminders))
+    this.save()
   }
  
   public saveReminder = ( reminder: reminder ): void => {
     this.reminders.unshift(reminder)
-    localStorage.setItem('reminders', JSON.stringify(this.reminders))
+    this.save()
   }
 
-  public saveChildReminder = ( index: number , reminder: reminder ): void => {
-    this.reminders[index].children?.push(reminder)
+  public save = (): void =>{
     localStorage.setItem('reminders', JSON.stringify(this.reminders))
   }
-
 
 }
