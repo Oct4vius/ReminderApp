@@ -20,6 +20,9 @@ export class InputComponent {
   @Input()
   public Icon?: IconProp;
 
+  @Input()
+  public isChild: boolean = false; 
+
   @Output()
   public saveInputValue: EventEmitter<string> = new EventEmitter();
 

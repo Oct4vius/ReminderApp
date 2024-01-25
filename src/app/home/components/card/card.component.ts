@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faClipboard, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { reminder } from '../../types/home.types';
 import { HomeService } from '../../services/home.service';
 import { v4 } from 'uuid';
@@ -26,17 +26,33 @@ export class CardComponent implements OnInit {
   @Output()
   public onDeleteChildReminder: EventEmitter<reminder> = new EventEmitter();
 
+
+
   public faPlus = faPlus;
   public faTrash = faTrash;
+  public faClipboard = faClipboard
+  public faArrowRight = faArrowRight
 
   public showChildren: boolean = false;
+  public showAddChildInput: boolean = false;
 
   public toggleShowChildren = () => {
     this.showChildren = !this.showChildren;
+
+    if(this.showAddChildInput) this.showAddChildInput = false
   };
 
-  public showReminderChildren = () => {
-    this.showChildren = true;
+  public showAddReminderChild = () => {
+    if(!this.showAddChildInput){
+      this.showChildren = true
+      this.showAddChildInput = true
+      return;
+    }
+
+    this.showChildren = !this.showChildren;
+
+    this.showAddChildInput = false
+    
   };
 
   public onAddChild = (title: string) => {
