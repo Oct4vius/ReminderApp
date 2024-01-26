@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { faArrowRight, faClipboard, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faArrowDown, faArrowRight, faClipboard, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { reminder } from '../../types/home.types';
 import { HomeService } from '../../services/home.service';
 import { v4 } from 'uuid';
@@ -18,6 +18,9 @@ export class CardComponent implements OnInit {
   public isChild: boolean = false;
 
   @Input()
+  public isEvenChild: number = 0
+
+  @Input()
   public cardIndex: number = 0;
 
   @Output()
@@ -32,6 +35,7 @@ export class CardComponent implements OnInit {
   public faTrash = faTrash;
   public faClipboard = faClipboard
   public faArrowRight = faArrowRight
+  public faArrowDown = faArrowDown
 
   public showChildren: boolean = false;
   public showAddChildInput: boolean = false;

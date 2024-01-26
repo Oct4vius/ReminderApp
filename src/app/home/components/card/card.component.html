@@ -1,4 +1,4 @@
-<div class="w-full bg-[#FFDD95]" [ngClass]="{ 'mt-2': !isChild }">
+<div class="w-full" [ngClass]="{ 'mt-2': !isChild }">
   <div class="w-full flex justify-between px-5 py-1">
     <div
       class="flex gap-2"
@@ -8,16 +8,13 @@
       }"
       (click)="toggleShowChildren()"
     >
-      <h2 class="font-bold">
+      <div class="font-bold">
         {{ reminder.title }}
-      </h2>
-
-      @if (reminder.children?.length !== 0) {
-
-      <fa-icon [icon]="faArrowRight" [ngClass]="{ 'rotate-90': showChildren }">
-      </fa-icon>
-
-      }
+        <fa-icon
+          *ngIf="reminder.children?.length !== 0"
+          [icon]="showChildren ? faArrowDown : faArrowRight"
+        />
+      </div>
     </div>
 
     <div class="flex gap-4">
@@ -37,7 +34,13 @@
 
   @if (showChildren) {
 
-  <div class="px-8">
+  <div
+    class="ml-1 mb-2 rounded-md"
+    [ngClass]="{
+      'bg-secundary': isEvenChild % 2 === 0,
+      'bg-primary': isEvenChild % 2 !== 0
+    }"
+  >
     @if (showAddChildInput) {
     <shared-input
       placeholder="Anything else you would like to remember?"
@@ -54,6 +57,7 @@
       [cardIndex]="i"
       [reminder]="reminder"
       [isChild]="true"
+      [isEvenChild]="isEvenChild + 1"
     ></home-card>
   </div>
 
