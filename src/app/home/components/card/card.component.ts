@@ -41,6 +41,9 @@ export class CardComponent implements OnInit {
   public showAddChildInput: boolean = false;
 
   public toggleShowChildren = () => {
+
+    if(this.reminder.children?.length === 0) return;
+
     this.showChildren = !this.showChildren;
 
     if(this.showAddChildInput) this.showAddChildInput = false
