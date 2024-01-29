@@ -10,7 +10,7 @@ createWindow = () => {
         minWidth: 340,
         minHeight: 500,
         movable: true,
-        backgroundColor: "#FF9843",
+        backgroundColor: "#25282A",
         frame: false,
         resizable: true,
         webPreferences: {

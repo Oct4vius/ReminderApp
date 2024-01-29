@@ -6,9 +6,10 @@ import { v4 } from 'uuid';
 
 @Component({
   selector: 'home-card',
-  templateUrl: './card.component.html',
+  templateUrl: './card.component.html'
 })
 export class CardComponent implements OnInit {
+
   constructor(private homeService: HomeService) {}
 
   @Input()
@@ -30,7 +31,6 @@ export class CardComponent implements OnInit {
   public onDeleteChildReminder: EventEmitter<reminder> = new EventEmitter();
 
 
-
   public faPlus = faPlus;
   public faTrash = faTrash;
   public faClipboard = faClipboard
@@ -42,11 +42,14 @@ export class CardComponent implements OnInit {
 
   public toggleShowChildren = () => {
 
-    if(this.reminder.children?.length === 0) return;
+    if(this.reminder.children.length === 0) return;
+
+    if(this.showAddChildInput){
+      this.showAddChildInput = false
+    }
 
     this.showChildren = !this.showChildren;
 
-    if(this.showAddChildInput) this.showAddChildInput = false
   };
 
   public showAddReminderChild = () => {
@@ -55,15 +58,12 @@ export class CardComponent implements OnInit {
       this.showAddChildInput = true
       return;
     }
-
-    this.showChildren = !this.showChildren;
-
     this.showAddChildInput = false
     
   };
 
   public onAddChild = (title: string) => {
-    this.reminder.children?.push({
+    this.reminder.children.push({
       id: v4(),
       title,
       children: [],
@@ -81,11 +81,14 @@ export class CardComponent implements OnInit {
   };
 
   public handleDeleteChild = (reminder: reminder): void => {
-    if (!this.reminder.children) return;
 
     this.reminder.children = this.reminder.children.filter(
       (rem) => rem.id !== reminder.id
     );
+
+    if(this.reminder.children.length === 0){
+      this.toggleShowChildren()
+    }
 
     this.homeService.save()
   };

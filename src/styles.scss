@@ -5,12 +5,32 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'Poppins';
-    src: url('assets/fonts/Poppins-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "Poppins";
+  src: url("assets/fonts/Poppins-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }
 
-*{
-    font-family: 'Poppins';
+* {
+  font-family: "Poppins";
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: wheat;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: wheat;
 }

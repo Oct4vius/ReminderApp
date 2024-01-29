@@ -1,14 +1,25 @@
-<div class="w-full" [ngClass]="{ 'mt-2': !isChild }">
+<div
+  class="w-full mt-2 rounded-sm text-white"
+  [ngClass]="{
+    'bg-[#131E29]': !isChild,
+    'bg-[#475C6C]': isChild
+  }"
+>
+  <div
+    class="w-full h-1 rounded-t-sm"
+    [ngClass]="{ 'bg-green-500': !isChild }"
+  ></div>
+
   <div class="w-full flex justify-between px-5 py-1">
     <div
       class="flex gap-2"
       [ngClass]="{
-        'cursor-pointer': reminder.children?.length !== 0,
-        'cursor-default': reminder.children?.length === 0
+        'cursor-pointer': reminder.children.length !== 0,
+        'cursor-default': reminder.children.length === 0
       }"
       (click)="toggleShowChildren()"
     >
-      <div class="font-bold">
+      <div class="font-light text-sm">
         {{ reminder.title }}
         <fa-icon
           *ngIf="reminder.children?.length !== 0"
@@ -17,7 +28,7 @@
       </div>
     </div>
 
-    <div class="flex gap-4">
+    <div class="flex items-center gap-4">
       <fa-icon
         class="cursor-pointer hover:text-red-500"
         (click)="!isChild ? onDelete() : onDeleteChild()"
@@ -30,15 +41,16 @@
         [icon]="faPlus"
       ></fa-icon>
     </div>
+
   </div>
 
   @if (showChildren) {
 
   <div
-    class="ml-1 mb-2 rounded-md"
+    class="p-2 rounded-sm"
     [ngClass]="{
-      'bg-secundary': isEvenChild % 2 === 0,
-      'bg-primary': isEvenChild % 2 !== 0
+      'bg-[#141414]': isEvenChild % 2 === 0,
+      'bg-[#25282A]': isEvenChild % 2 !== 0
     }"
   >
     @if (showAddChildInput) {

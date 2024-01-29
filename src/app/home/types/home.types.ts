@@ -1,5 +1,6 @@
 export type reminder = {
     id: string
     title: string,
-    children?: reminder[]
+    children: reminder[]
+    date?: Date
   }

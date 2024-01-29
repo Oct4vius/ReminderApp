@@ -1,7 +1,7 @@
 <div class="flex flex-col gap-2">
   <home-topbar (addReminder)="addReminder($event)"></home-topbar>
 
-  <div>
+  <div class="p-2" >
     <home-card
       *ngFor="let reminder of reminders; let i = index"
       [cardIndex]="i"
