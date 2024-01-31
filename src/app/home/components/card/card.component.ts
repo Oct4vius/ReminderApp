@@ -63,7 +63,7 @@ export class CardComponent implements OnInit {
   };
 
   public onAddChild = (title: string) => {
-    this.reminder.children.push({
+    this.reminder.children.unshift({
       id: v4(),
       title,
       children: [],

@@ -19,7 +19,7 @@
       }"
       (click)="toggleShowChildren()"
     >
-      <div class="font-light text-sm">
+      <div class="font-light text-sm text-pretty overflow-hidden">
         {{ reminder.title }}
         <fa-icon
           *ngIf="reminder.children?.length !== 0"
