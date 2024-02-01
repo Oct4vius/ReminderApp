@@ -93,6 +93,10 @@ export class CardComponent implements OnInit {
     this.homeService.save()
   };
 
+  public copyToClipboard() {
+    navigator.clipboard.writeText(this.reminder.title)
+  }
+
   ngOnInit(): void {
     if (!this.reminder) throw Error('It needs a reminder');
   }

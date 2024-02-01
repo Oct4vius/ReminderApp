@@ -34,14 +34,17 @@
         (click)="!isChild ? onDelete() : onDeleteChild()"
         [icon]="faTrash"
       ></fa-icon>
-      <fa-icon [icon]="faClipboard"></fa-icon>
+      <fa-icon
+        class="cursor-pointer hover:text-blue-600"
+        (click)="copyToClipboard()"
+        [icon]="faClipboard"
+      ></fa-icon>
       <fa-icon
         class="cursor-pointer hover:text-green-600"
         (click)="showAddReminderChild()"
         [icon]="faPlus"
       ></fa-icon>
     </div>
-
   </div>
 
   @if (showChildren) {
@@ -55,7 +58,7 @@
   >
     @if (showAddChildInput) {
     <shared-input
-      placeholder="Anything else you would like to remember?"
+      placeholder="An other thing to remember?"
       (saveInputValue)="onAddChild($event)"
       [isChild]="true"
     >
