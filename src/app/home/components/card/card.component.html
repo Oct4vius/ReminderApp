@@ -1,5 +1,5 @@
 <div
-  class="w-full mt-2 rounded-sm text-white"
+  class="w-full mt-2 rounded-sm text-white card"
   [ngClass]="{
     'bg-[#131E29]': !isChild,
     'bg-[#475C6C]': isChild
@@ -9,6 +9,10 @@
     class="w-full h-1 rounded-t-sm"
     [ngClass]="{ 'bg-green-500': !isChild }"
   ></div>
+
+  <div class=" flex items-center justify-end min-h-5">
+    <shared-dropdown [items]="dropdownItems" class="hidden dropdown relative" />
+  </div>
 
   <div class="w-full flex justify-between px-5 py-1">
     <div

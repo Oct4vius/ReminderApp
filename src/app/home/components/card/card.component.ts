@@ -6,7 +6,8 @@ import { v4 } from 'uuid';
 
 @Component({
   selector: 'home-card',
-  templateUrl: './card.component.html'
+  templateUrl: './card.component.html',
+  styleUrl: './card.component.scss'
 })
 export class CardComponent implements OnInit {
 
@@ -39,6 +40,8 @@ export class CardComponent implements OnInit {
 
   public showChildren: boolean = false;
   public showAddChildInput: boolean = false;
+
+  public dropdownItems = [{label: 'edit'}, {label: 'remove'}, {label: 'copy'}]
 
   public toggleShowChildren = () => {
 

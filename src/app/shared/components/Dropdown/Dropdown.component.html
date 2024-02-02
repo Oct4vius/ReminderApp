@@ -1,0 +1,16 @@
+<div class="flex gap-1 px-4 pt-4 opacity-50 hover:opacity-100" (click)="toggleDropdown()" >
+    <div class="h-1 w-1 bg-white  rounded-full "></div>
+    <div class="h-1 w-1 bg-white  rounded-full "></div>
+    <div class="h-1 w-1 bg-white  rounded-full "></div>
+</div>
+
+
+<div *ngIf="isOpen" class="absolute z-10 bg-white text-black top-6 right-4 px-4 py-2 rounded-sm">
+
+    <label class="hover:bg-[#ccc] w-full flex rounded-sm px-2"  *ngFor="let item of items">
+    
+        {{ item.label }}
+    
+    </label>
+
+</div>
