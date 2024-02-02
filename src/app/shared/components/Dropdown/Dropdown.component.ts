@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'shared-dropdown',
@@ -9,10 +9,14 @@ export class DropdownComponent {
   @Input()
   public items: any;
 
+  @Input()
   public isOpen: boolean = false
 
-  public toggleDropdown = () => {
-    this.isOpen = !this.isOpen
+  @Output()
+  public toggleDropdown: EventEmitter<null> = new EventEmitter() 
+
+  public emitToggle = () => {
+    this.toggleDropdown.emit()
   }
 
 }

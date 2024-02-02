@@ -42,6 +42,11 @@ export class CardComponent implements OnInit {
   public showAddChildInput: boolean = false;
 
   public dropdownItems = [{label: 'edit'}, {label: 'remove'}, {label: 'copy'}]
+  public isDropdownOpen: boolean = false
+  public toggleDropdown = () => {
+    this.isDropdownOpen = !this.isDropdownOpen
+  }
+
 
   public toggleShowChildren = () => {
 
