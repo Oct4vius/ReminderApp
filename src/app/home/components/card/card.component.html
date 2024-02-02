@@ -1,5 +1,6 @@
 <div
   class="w-full mt-2 rounded-sm text-white card"
+  (mouseleave)="isDropdownOpen = false"
   [ngClass]="{
     'bg-[#131E29]': !isChild,
     'bg-[#475C6C]': isChild
