@@ -1,16 +1,23 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { faArrowDown, faArrowRight, faClipboard, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
+import {
+  faArrowDown,
+  faArrowRight,
+  faCheck,
+  faClipboard,
+  faPlus,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons';
 import { reminder } from '../../types/home.types';
 import { HomeService } from '../../services/home.service';
 import { v4 } from 'uuid';
+import { DropdownItem } from '../../../shared/types/shared.types';
 
 @Component({
   selector: 'home-card',
   templateUrl: './card.component.html',
-  styleUrl: './card.component.scss'
+  styleUrl: './card.component.scss',
 })
 export class CardComponent implements OnInit {
-
   constructor(private homeService: HomeService) {}
 
   @Input()
@@ -20,7 +27,7 @@ export class CardComponent implements OnInit {
   public isChild: boolean = false;
 
   @Input()
-  public isEvenChild: number = 0
+  public isEvenChild: number = 0;
 
   @Input()
   public cardIndex: number = 0;
@@ -31,43 +38,43 @@ export class CardComponent implements OnInit {
   @Output()
   public onDeleteChildReminder: EventEmitter<reminder> = new EventEmitter();
 
-
   public faPlus = faPlus;
   public faTrash = faTrash;
-  public faClipboard = faClipboard
-  public faArrowRight = faArrowRight
-  public faArrowDown = faArrowDown
+  public faCheck = faCheck
+  public faClipboard = faClipboard;
+  public faArrowRight = faArrowRight;
+  public faArrowDown = faArrowDown;
 
   public showChildren: boolean = false;
   public showAddChildInput: boolean = false;
 
-  public dropdownItems = [{label: 'edit'}, {label: 'remove'}, {label: 'copy'}]
-  public isDropdownOpen: boolean = false
+  public dropdownItems: DropdownItem[] = [
+    { label: 'Copy', icon: faClipboard, click: () => this.copyToClipboard() },
+    { label: 'Remove', icon: faTrash, click: () => !this.isChild ? this.onDelete() : this.onDeleteChild()},
+    { label: 'Done', icon: faCheck, click: () => console.log('reminder completed') }
+  ];
+  public isDropdownOpen: boolean = false;
   public toggleDropdown = () => {
-    this.isDropdownOpen = !this.isDropdownOpen
-  }
-
+    this.isDropdownOpen = !this.isDropdownOpen;
+  };
 
   public toggleShowChildren = () => {
+    if (this.reminder.children.length === 0) return;
 
-    if(this.reminder.children.length === 0) return;
-
-    if(this.showAddChildInput){
-      this.showAddChildInput = false
+    if (this.showAddChildInput) {
+      this.showAddChildInput = false;
     }
 
     this.showChildren = !this.showChildren;
-
   };
 
   public showAddReminderChild = () => {
-    if(!this.showAddChildInput){
-      this.showChildren = true
-      this.showAddChildInput = true
+    if (!this.showAddChildInput) {
+      this.showChildren = true;
+      this.showAddChildInput = true;
       return;
     }
-    this.showAddChildInput = false
-    
+    this.showAddChildInput = false;
   };
 
   public onAddChild = (title: string) => {
@@ -77,7 +84,7 @@ export class CardComponent implements OnInit {
       children: [],
     });
 
-    this.homeService.save()
+    this.homeService.save();
   };
 
   public onDelete = (): void => {
@@ -89,20 +96,20 @@ export class CardComponent implements OnInit {
   };
 
   public handleDeleteChild = (reminder: reminder): void => {
-
     this.reminder.children = this.reminder.children.filter(
       (rem) => rem.id !== reminder.id
     );
 
-    if(this.reminder.children.length === 0){
-      this.toggleShowChildren()
+    if (this.reminder.children.length === 0) {
+      this.toggleShowChildren();
     }
 
-    this.homeService.save()
+    this.homeService.save();
   };
 
   public copyToClipboard() {
-    navigator.clipboard.writeText(this.reminder.title)
+    navigator.clipboard.writeText(this.reminder.title);
+    this.isDropdownOpen = false
   }
 
   ngOnInit(): void {

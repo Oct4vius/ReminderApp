@@ -1,5 +1,5 @@
 <div
-  class="w-full mt-2 rounded-sm text-white card"
+  class="w-full mt-2 rounded-sm text-white card shadow-red-600"
   (mouseleave)="isDropdownOpen = false"
   [ngClass]="{
     'bg-[#131E29]': !isChild,
@@ -10,10 +10,6 @@
     class="w-full h-1 rounded-t-sm"
     [ngClass]="{ 'bg-green-500': !isChild }"
   ></div>
-
-  <div class=" flex items-center justify-end min-h-5">
-    <shared-dropdown [isOpen]="isDropdownOpen" (toggleDropdown)="toggleDropdown()" [items]="dropdownItems" class="hidden dropdown relative" />
-  </div>
 
   <div class="w-full flex justify-between px-5 py-1">
     <div
@@ -33,22 +29,19 @@
       </div>
     </div>
 
-    <div class="flex items-center gap-4">
-      <fa-icon
-        class="cursor-pointer hover:text-red-500"
-        (click)="!isChild ? onDelete() : onDeleteChild()"
-        [icon]="faTrash"
-      ></fa-icon>
-      <fa-icon
-        class="cursor-pointer hover:text-blue-600"
-        (click)="copyToClipboard()"
-        [icon]="faClipboard"
-      ></fa-icon>
+    <div class="flex flex-col items-center justify-between">
+      <div class="min-h-1">
+        <shared-dropdown [isOpen]="isDropdownOpen" (toggleDropdown)="toggleDropdown()" [items]="dropdownItems" class="hidden dropdown relative" />
+      </div>
+
       <fa-icon
         class="cursor-pointer hover:text-green-600"
         (click)="showAddReminderChild()"
         [icon]="faPlus"
       ></fa-icon>
+
+      <span></span>
+      
     </div>
   </div>
 

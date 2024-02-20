@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { DropdownItem } from '../../types/shared.types';
 
 @Component({
   selector: 'shared-dropdown',
@@ -7,7 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class DropdownComponent { 
 
   @Input()
-  public items: any;
+  public items: DropdownItem[] = [];
 
   @Input()
   public isOpen: boolean = false
