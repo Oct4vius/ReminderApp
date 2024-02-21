@@ -1,5 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
+import {
   faArrowDown,
   faArrowRight,
   faCheck,
@@ -16,6 +23,14 @@ import { DropdownItem } from '../../../shared/types/shared.types';
   selector: 'home-card',
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({
+        height: 0
+      })),
+      transition('void <=> *', animate(300)),
+    ]),
+  ]
 })
 export class CardComponent implements OnInit {
   constructor(private homeService: HomeService) {}
@@ -40,7 +55,7 @@ export class CardComponent implements OnInit {
 
   public faPlus = faPlus;
   public faTrash = faTrash;
-  public faCheck = faCheck
+  public faCheck = faCheck;
   public faClipboard = faClipboard;
   public faArrowRight = faArrowRight;
   public faArrowDown = faArrowDown;
@@ -50,8 +65,16 @@ export class CardComponent implements OnInit {
 
   public dropdownItems: DropdownItem[] = [
     { label: 'Copy', icon: faClipboard, click: () => this.copyToClipboard() },
-    { label: 'Remove', icon: faTrash, click: () => !this.isChild ? this.onDelete() : this.onDeleteChild()},
-    { label: 'Done', icon: faCheck, click: () => console.log('reminder completed') }
+    {
+      label: 'Remove',
+      icon: faTrash,
+      click: () => (!this.isChild ? this.onDelete() : this.onDeleteChild()),
+    },
+    {
+      label: 'Done',
+      icon: faCheck,
+      click: () => console.log('reminder completed'),
+    },
   ];
   public isDropdownOpen: boolean = false;
   public toggleDropdown = () => {
@@ -109,7 +132,7 @@ export class CardComponent implements OnInit {
 
   public copyToClipboard() {
     navigator.clipboard.writeText(this.reminder.title);
-    this.isDropdownOpen = false
+    this.isDropdownOpen = false;
   }
 
   ngOnInit(): void {

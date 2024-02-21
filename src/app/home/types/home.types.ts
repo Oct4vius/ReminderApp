@@ -3,4 +3,5 @@ export type reminder = {
     title: string,
     children: reminder[]
     date?: Date
+    isCompleted?: boolean
   }
