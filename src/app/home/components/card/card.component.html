@@ -13,7 +13,7 @@
 
   <div class="w-full flex justify-between px-5 gap-2 py-1">
     <div
-      class="flex gap-2"
+      class="flex w-full gap-2"
       [ngClass]="{
         'cursor-pointer': reminder.children.length !== 0,
         'cursor-default': reminder.children.length === 0
@@ -21,9 +21,11 @@
       (click)="toggleShowChildren()"
     >
       <div
-        class="font-light text-sm flex items-center text-pretty overflow-hidden"
+        class="font-light text-sm flex justify-between items-center overflow-hidden w-full"
       >
-        {{ reminder.title }}
+        <span class="text-ellipsis text-pretty w-fit" >
+          {{ reminder.title }}
+        </span>
         <fa-icon
           class="pl-2"
           *ngIf="reminder.children?.length !== 0"
