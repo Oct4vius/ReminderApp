@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { HomeService } from '../../services/home.service';
 import { reminder } from '../../types/home.types';
+import { MongoDBService } from '../../services/mongo.service';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +10,8 @@ import { reminder } from '../../types/home.types';
 })
 export class HomePageComponent{ 
 
+
+  public mongoService = inject( MongoDBService )
   constructor (private homeService: HomeService) { }
 
   get reminders(): reminder[]{
