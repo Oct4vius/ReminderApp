@@ -1,7 +1,7 @@
-export type reminder = {
-    id: string
-    title: string,
-    children: reminder[]
-    date?: Date
-    isCompleted?: boolean
-  }
+export type Reminder = {
+  id: string;
+  title: string;
+  children: Reminder[];
+  date?: Date;
+  isCompleted?: boolean;
+};

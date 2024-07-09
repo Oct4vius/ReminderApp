@@ -14,7 +14,7 @@ import {
   faPlus,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
-import { reminder } from '../../types/home.types';
+import { Reminder } from '../../types/home.types';
 import { HomeService } from '../../services/home.service';
 import { v4 } from 'uuid';
 import { DropdownItem } from '../../../shared/types/shared.types';
@@ -36,7 +36,7 @@ export class CardComponent implements OnInit {
   constructor(private homeService: HomeService) {}
 
   @Input()
-  public reminder!: reminder;
+  public reminder!: Reminder;
 
   @Input()
   public isChild: boolean = false;
@@ -51,7 +51,7 @@ export class CardComponent implements OnInit {
   public onDeleteReminder: EventEmitter<string> = new EventEmitter();
 
   @Output()
-  public onDeleteChildReminder: EventEmitter<reminder> = new EventEmitter();
+  public onDeleteChildReminder: EventEmitter<Reminder> = new EventEmitter();
 
   public faPlus = faPlus;
   public faTrash = faTrash;
@@ -118,7 +118,7 @@ export class CardComponent implements OnInit {
     this.onDeleteChildReminder.emit(this.reminder);
   };
 
-  public handleDeleteChild = (reminder: reminder): void => {
+  public handleDeleteChild = (reminder: Reminder): void => {
     this.reminder.children = this.reminder.children.filter(
       (rem) => rem.id !== reminder.id
     );

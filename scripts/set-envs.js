@@ -1,5 +1,5 @@
 
-const { writeFileSync, mkdirSync } = require('fs')
+import { writeFileSync, mkdirSync } from 'fs';
 require("dotenv").config();
 
 const targetPath = "./src/environments/environments.ts";

@@ -1,20 +1,19 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { HomeService } from '../../services/home.service';
-import { reminder } from '../../types/home.types';
-import { MongoDBService } from '../../services/mongo.service';
+import { Reminder } from '../../types/home.types';
+import { ElectronService } from '../../services/electron.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './homePage.component.html',
   styleUrl: './homePage.component.scss',
 })
-export class HomePageComponent{ 
+export class HomePageComponent implements OnInit {
 
+  private homeService = inject(HomeService)
+  private electronService = inject(ElectronService)
 
-  public mongoService = inject( MongoDBService )
-  constructor (private homeService: HomeService) { }
-
-  get reminders(): reminder[]{
+  get reminders(): Reminder[]{
     return [...this.homeService._reminders ]
   }
 
@@ -22,12 +21,12 @@ export class HomePageComponent{
     this.homeService.deleteReminder(title)
   }
 
-  public deleteChildReminder = ( reminder: reminder ) => {
+  public deleteChildReminder = ( reminder: Reminder ) => {
     // Se elemina solo porque al hacer el filtro desde el hijo automaticamente se actualiza aqui en el padre pero no se guarda en el local storage
     console.log(reminder)
   }
 
-  public addReminder = (reminder: reminder) => {
+  public addReminder = (reminder: Reminder) => {
     this.homeService.saveReminder(reminder)
   }
 
@@ -35,5 +34,9 @@ export class HomePageComponent{
     console.log(this.homeService._reminders)
   }
 
+  ngOnInit(): void {
+
+
+  }
 
 }

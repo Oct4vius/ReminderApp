@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
-import { reminder } from '../../types/home.types';
+import { Reminder } from '../../types/home.types';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import { v4 } from 'uuid';
 
@@ -7,13 +7,13 @@ import { v4 } from 'uuid';
   selector: 'home-topbar',
   templateUrl: './topBar.component.html',
 })
-export class TopBarComponent { 
+export class TopBarComponent {
 
   @ViewChild('reminderInput')
   public reminderInput!: ElementRef<HTMLInputElement>;
 
   @Output()
-  public addReminder: EventEmitter<reminder> = new EventEmitter()
+  public addReminder: EventEmitter<Reminder> = new EventEmitter()
 
   public faPlus = faPlus
 

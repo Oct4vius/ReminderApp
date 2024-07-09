@@ -1,37 +1,42 @@
-import { Injectable } from '@angular/core';
-import { reminder } from '../types/home.types';
+import { inject, Injectable } from '@angular/core';
+import { Reminder } from '../types/home.types';
+import { ElectronService } from './electron.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class HomeService{
+export class HomeService {
+  private electronService = inject(ElectronService);
+
+  async print() {
+    console.log(await this.electronService.getReminders());
+  }
 
   constructor() {
-    if(!localStorage.getItem("reminders")){
-      this.reminders = [] 
-    }else{
-      this.reminders = JSON.parse(localStorage.getItem('reminders')!)
+    if (!localStorage.getItem('reminders')) {
+      this.reminders = [];
+    } else {
+      this.reminders = JSON.parse(localStorage.getItem('reminders')!);
     }
   }
 
-  private reminders!: reminder[];
+  private reminders!: Reminder[];
 
   get _reminders() {
-    return [...this.reminders]
+    return [...this.reminders];
   }
 
-  public deleteReminder = ( id: string ): void => {
-    this.reminders = this.reminders.filter( (reminder) => reminder.id !== id )
-    this.save()
-  }
- 
-  public saveReminder = ( reminder: reminder ): void => {
-    this.reminders.unshift(reminder)
-    this.save()
-  }
+  public deleteReminder = (id: string): void => {
+    this.reminders = this.reminders.filter((reminder) => reminder.id !== id);
+    this.save();
+  };
 
-  public save = (): void =>{
-    localStorage.setItem('reminders', JSON.stringify(this.reminders))
-  }
+  public saveReminder = (reminder: Reminder): void => {
+    this.reminders.unshift(reminder);
+    this.save();
+  };
 
+  public save = (): void => {
+    localStorage.setItem('reminders', JSON.stringify(this.reminders));
+  };
 }
